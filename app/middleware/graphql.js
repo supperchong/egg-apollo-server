@@ -12,23 +12,19 @@ const compose = require('koa-compose')
 
 module.exports = (_, app) => {
   const options = {...app.schemaConfig,...app.config.graphql};
-  const graphQLRouter = options.router;
-  let graphiql = true;
-
-  if (options.graphiql === false) {
-    graphiql = false;
-  }
-
+  const {graphiql=true,router,...ApolloServerConfig}=options
   const server = new ApolloServer({
-    ...options,
-    context: function(options){
-      return options.ctx
+    context: options=>options.ctx,
+    //不设置request.credentials 会导致请求不带cookie
+    playground:graphiql&&{
+      settings:{
+        "request.credentials": "include"
+      }
     },
-    playground:graphiql,
-    
+    ...ApolloServerConfig,
   })
-  if(graphQLRouter){
-    server.setGraphQLPath(graphQLRouter)
+  if(router){
+    server.setGraphQLPath(router)
   }
   
   let middlewares = []
