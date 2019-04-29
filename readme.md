@@ -26,4 +26,8 @@ config.graphql = {
 };
 ```
 
-Support upload file.
+## egg-apollo-server 和 egg-graphql 的区别
+
+1. 除了 onPreGraphQL,onPreGraphiQL 外完全兼容 egg-graphql 配置选项
+2. **支持文件上传**.
+3. 更漂亮的调试界面
