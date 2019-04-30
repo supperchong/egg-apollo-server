@@ -1,8 +1,6 @@
 'use strict';
 
-// Notice that this path is totally changed, because this function isn't
-// directly exposed to the public, now we must still use that for the middle-
-// ware.
+
 const { ApolloServer } = require('apollo-server-koa')
 const compose = require('koa-compose')
 /**
@@ -11,7 +9,11 @@ const compose = require('koa-compose')
  */
 
 module.exports = (_, app) => {
-  const options = {...app.schemaConfig,...app.config.graphql};
+  let graphqlConfig=app.config.graphql
+  if(typeof graphqlConfig==='function'){
+    graphqlConfig=graphqlConfig(app)
+  }
+  const options = {...app.schemaConfig,...graphqlConfig}
   const {graphiql=true,router,...ApolloServerConfig}=options
   const server = new ApolloServer({
     context: options=>options.ctx,
@@ -23,11 +25,8 @@ module.exports = (_, app) => {
     },
     ...ApolloServerConfig,
   })
-  if(router){
-    server.setGraphQLPath(router)
-  }
   
-  let middlewares = []
+  const middlewares = []
   const proxyApp = {
     use: m => {
       middlewares.push(m)
@@ -35,6 +34,7 @@ module.exports = (_, app) => {
   }
   server.applyMiddleware({
     app: proxyApp,
+    path:router
   })
   return compose(middlewares)
-};
+}
