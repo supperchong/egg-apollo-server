@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * copy from https://github.com/eggjs/egg-graphql/blob/master/app/service/graphql.js
+ * 主要为了兼容egg-graphql
+ */
 const { execute, formatError } = require('graphql');
 const gql = require('graphql-tag');
 
