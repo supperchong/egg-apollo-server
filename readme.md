@@ -8,16 +8,16 @@ plugin in egg.
 
 ```js
 config.graphql = {
-	router: "/graphql",
+  router: "/graphql",
 
 	// 是否加载到 app 上，默认开启
-	app: true,
+  app: true,
 	// 是否加载到 agent 上，默认关闭
-	agent: false,
-	// 是否加载开发者工具 graphiql, 默认开启。路由同 router 字段。使用浏览器打开该可见。
-	graphiql: true
-	// graphQL 路由前的拦截器
-	// * onPreGraphQL(ctx) {}, 不支持
+  agent: false,
+  // 是否加载开发者工具 graphiql, 默认开启。路由同 router 字段。使用浏览器打开该可见。
+  graphiql: true
+  // graphQL 路由前的拦截器
+  // * onPreGraphQL(ctx) {}, 不支持
 
   // * onPreGraphiQL(ctx) {}, 不支持
   //以下为apollo-server中的options
@@ -26,8 +26,19 @@ config.graphql = {
 };
 ```
 
+## **options**
+
+- router <String> - 路由,默认为 "/graphql"
+- app <Boolean> - 是否加载到 app 上,默认为 true
+- agent <Boolean> - 是否加载到 agent 上,默认为 false
+- graphiql <Boolean> - 是否加载开发者工具 graphiql,默认为 true
+- uploads <Boolean> - 是否开启文件上传功能,默认为 false
+
+其它 options 参
+见[apollo-server](https://www.apollographql.com/docs/apollo-server/api/apollo-serve)
+
 ## egg-apollo-server 和 egg-graphql 的区别
 
 1. 除了 onPreGraphQL,onPreGraphiQL 外完全兼容 egg-graphql 配置选项
 2. **支持文件上传**.
-3. 更漂亮的调试界面
+3. **更漂亮的调试界面**.
