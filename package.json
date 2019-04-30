@@ -1,0 +1,22 @@
+{
+  "name": "egg-apollo-server",
+  "version": "0.0.1",
+  "description": "The apollo-server-koa plugin in egg.",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supperchong/egg-apollo-server.git"
+  },
+  "author": "supperchong@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/supperchong/egg-apollo-server/issues"
+  },
+  "homepage": "https://github.com/supperchong/egg-apollo-server#readme"
+}
