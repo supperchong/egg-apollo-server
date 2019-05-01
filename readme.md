@@ -72,4 +72,6 @@ config.graphql =app=>{
 
 ## TODO
 
+- add test
 - 支持自定义 schema,可自定义 graphql 相关文件结构
+- 支持typeDefs里引用model数据
