@@ -27,7 +27,7 @@ config.graphql = {
   router: "/graphql",
   app: true,
   agent: false,
-  graphiql: true
+  graphiql: true,
   uploads: true, //是否开启文件上传功能，默认关闭
   //可选字段,接受项目中发生的错误,然后自定义错误返回给前端，可以用来过滤错误的堆栈信息
   formatError:error=>{
@@ -45,7 +45,7 @@ config.graphql =app=>{
     resolvers,
     app: true,
     agent: false,
-    graphiql: true
+    graphiql: true,
     uploads: true, //是否开启文件上传功能，默认关闭
   }
 }
