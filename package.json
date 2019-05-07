@@ -15,7 +15,9 @@
     "egg-apollo-server"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -34,5 +36,12 @@
     "graphql-tools": "^4.0.4",
     "koa-compose": "^4.1.0",
     "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "egg": "^2.22.2",
+    "egg-bin": "^4.13.0",
+    "egg-mock": "^3.22.4",
+    "eslint": "^5.16.0",
+    "eslint-config-egg": "^7.4.1"
   }
 }
