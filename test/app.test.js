@@ -1,7 +1,7 @@
 'use strict';
 
 const mock = require('egg-mock');
-
+// TODO add test
 describe('test/app.test.js', () => {
   let app;
   before(() => {
