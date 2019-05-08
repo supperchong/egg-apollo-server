@@ -13,22 +13,15 @@ module.exports = appInfo => {
     agent: false,
     graphiql: true,
     uploads: true, // 是否开启文件上传功能，默认关闭
-    // 可选字段,接受项目中发生的错误,然后自定义错误返回给前端，可以用来过滤错误的堆栈信息
+    // 可选字段,接受项目中发生的错误,然后自定义错误返回给前端
     formatError: error => {
       console.log(error);
-      return {
-        message: error.message,
-      };
+      return error;
     },
+    debug: false, // 发生错误时,是否包含错误堆栈信息,生产环境要设置为false
   };
   config.security = {
-    // csrf: {
-    //   ignoreJSON: true, // 默认为 false，当设置为 true 时，将会放过所有 content-type 为 `application/json` 的请求
-    // },
-    // csrf: false,
-    methodnoallow: {
-      enable: false,
-    },
+    csrf: false,
   };
   // change to your own sequelize configurations
   // config.sequelize = dbConfig.development;
