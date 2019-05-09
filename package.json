@@ -41,6 +41,7 @@
 		"lodash": "^4.17.11"
 	},
 	"devDependencies": {
+		"axios": "^0.18.0",
 		"egg": "^2.22.2",
 		"egg-bin": "^4.13.0",
 		"egg-mock": "^3.22.4",

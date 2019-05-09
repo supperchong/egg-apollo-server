@@ -2,6 +2,9 @@
 
 const mock = require('egg-mock');
 const assert = require('assert');
+const FormData = require('form-data');
+const fs = require('fs');
+const axios = require('axios');
 const users = [
   {
     id: 1,
@@ -182,5 +185,44 @@ describe('test/app.test.js', () => {
     assert.equal(res.body.data.addProject.user_id, projectInput.user_id);
 
 
+  });
+  it('should upload image', async () => {
+    const fd = new FormData();
+    const o = {
+      query: `mutation ($file: Upload!) {
+        uploadImage (file: $file)
+      }`,
+      variables: {
+        file: null,
+      },
+    };
+    const map = {
+      0: [ 'variables.file' ],
+    };
+    fd.append('operations', JSON.stringify(o));
+    fd.append('map', JSON.stringify(map));
+    fd.append(0, fs.createReadStream(`${__dirname}/logo.svg`));
+
+
+    const port = app.server.address().port;
+    const res = await axios.post(`http://localhost:${port}/graphql`, fd, {
+      headers: {
+        ...fd.getHeaders(),
+      },
+    });
+    assert.deepEqual(res.data,
+      {
+        data: {
+          uploadImage: true,
+        },
+      }
+    );
+
+    /**
+     * 以下写法发生错误
+     * ```js
+     * app.httpRequest().post("/graphql").send(fd).expect(200);
+     * ```
+     */
   });
 });
