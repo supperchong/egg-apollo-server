@@ -12,7 +12,7 @@ module.exports = appInfo => {
     app: true,
     agent: false,
     graphiql: true,
-    uploads: true, // 是否开启文件上传功能，默认关闭
+    uploads: true, // 是否开启文件上传功能，默认开启
     // 可选字段,接受项目中发生的错误,然后自定义错误返回给前端
     formatError: error => {
       console.log(error);
