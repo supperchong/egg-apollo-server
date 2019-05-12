@@ -25,7 +25,7 @@ module.exports = {
     },
     deleteProject(root, { input }) {
       const { id } = input;
-      // eslint-disable-next-line eqeqeqW
+      // eslint-disable-next-line eqeqeq
       const index = projects.findIndex(project => project.id == id);
       if (!index) return new Error('project not exist');
       projects.splice(index, 1);

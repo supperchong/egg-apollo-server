@@ -225,4 +225,19 @@ describe('test/app.test.js', () => {
      * ```
      */
   });
+
+  it('should return HELLO when use @upper directive', async () => {
+    const query = `
+    query{
+      hello
+    }
+    `;
+    const res = await app.httpRequest()
+      .post('/graphql')
+      .send({
+        query,
+      })
+      .expect(200);
+    assert.equal(res.body.data.hello, 'HELLO');
+  });
 });
