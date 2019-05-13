@@ -158,8 +158,8 @@ module.exports = {
 };
 ```
 
-#### demo
-[egg中使用graphql](https://github.com/supperchong/egg-apollo-server/examples/simple)
+#### demo  
+[egg中使用graphql](https://github.com/supperchong/egg-apollo-server/tree/master/examples/simple)
 #### **options**
 
 - router <String> - 处理 graphql 请求的路由,默认为 "/graphql"
