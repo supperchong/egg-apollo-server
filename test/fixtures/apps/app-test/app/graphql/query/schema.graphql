@@ -1,5 +1,0 @@
-type Query {
-	users: [User]
-	user(id: ID!): User
-	project(user_id: ID!): [Project]
-}
