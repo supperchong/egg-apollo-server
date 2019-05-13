@@ -1,6 +1,24 @@
 type Project {
-	user_id: ID!
-	id: ID!
-	name: String
-	describe: String
+  user_id: ID!
+  id: ID!
+  name: String
+  describe: String
+}
+input ProjectInput {
+  user_id: ID!
+  name: String
+  describe: String
+}
+input EditProjectInput {
+  id: ID!
+  name: String
+  describe: String
+}
+extend type Mutation {
+  addProject(input: ProjectInput): Project
+  updateProject(input: EditProjectInput): Project
+  deleteProject(id: ID!): Boolean
+}
+extend type Query {
+  project(user_id: ID!): [Project]
 }
