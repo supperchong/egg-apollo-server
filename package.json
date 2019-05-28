@@ -1,51 +1,52 @@
 {
-	"name": "egg-apollo-server",
-	"version": "0.1.0",
-	"description": "The apollo-server-koa plugin in egg.",
-	"directories": {
-		"lib": "lib"
-	},
-	"eggPlugin": {
-		"name": "apollo-server"
-	},
-	"keywords": [
-		"egg",
-		"graphql",
-		"egg-plugin",
-		"eggPlugin",
-		"apollo-server",
-		"egg-apollo-server"
-	],
-	"scripts": {
-		"test": "npm run lint -- --fix && npm run test-local",
-		"test-local": "egg-bin test --full-trace",
-		"lint": "eslint .",
-		"cov": "egg-bin cov"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/supperchong/egg-apollo-server.git"
-	},
-	"author": "supperchong@gmail.com",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/supperchong/egg-apollo-server/issues"
-	},
-	"homepage": "https://github.com/supperchong/egg-apollo-server#readme",
-	"dependencies": {
-		"apollo-server-koa": "^2.4.8",
-		"graphql": "^14.2.1",
-		"graphql-tag": "^2.10.1",
-		"graphql-tools": "^4.0.4",
-		"koa-compose": "^4.1.0",
-		"lodash": "^4.17.11"
-	},
-	"devDependencies": {
-		"axios": "^0.18.0",
-		"egg": "^2.22.2",
-		"egg-bin": "^4.13.0",
-		"egg-mock": "^3.22.4",
-		"eslint": "^5.16.0",
-		"eslint-config-egg": "^7.4.1"
-	}
+  "name": "egg-apollo-server",
+  "version": "0.1.0",
+  "description": "The apollo-server-koa plugin in egg.",
+  "directories": {
+    "lib": "lib"
+  },
+  "eggPlugin": {
+    "name": "apollo-server"
+  },
+  "keywords": [
+    "egg",
+    "graphql",
+    "egg-plugin",
+    "eggPlugin",
+    "apollo-server",
+    "egg-apollo-server"
+  ],
+  "scripts": {
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test --full-trace",
+    "lint": "eslint .",
+    "cov": "egg-bin cov",
+    "ci": "npm run lint && npm run cov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supperchong/egg-apollo-server.git"
+  },
+  "author": "supperchong@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/supperchong/egg-apollo-server/issues"
+  },
+  "homepage": "https://github.com/supperchong/egg-apollo-server#readme",
+  "dependencies": {
+    "apollo-server-koa": "^2.4.8",
+    "graphql": "^14.2.1",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.4",
+    "koa-compose": "^4.1.0",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "egg": "^2.22.2",
+    "egg-bin": "^4.13.0",
+    "egg-mock": "^3.22.4",
+    "eslint": "^5.16.0",
+    "eslint-config-egg": "^7.4.1"
+  }
 }

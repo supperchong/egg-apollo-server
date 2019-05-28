@@ -1,5 +1,16 @@
 # egg-apollo-server
 
+[![NPM version][npm-image]][npm-url]
+[![Test coverage][codecov-image]][codecov-url]
+[![npm download][download-image]][download-url]
+
+[npm-image]: https://img.shields.io/npm/v/egg-apollo-server.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/egg-apollo-server
+[codecov-image]: https://codecov.io/gh/supperchong/egg-apollo-server/branch/master/graphs/badge.svg
+[codecov-url]: https://codecov.io/gh/supperchong/egg-apollo-server
+[download-image]: https://img.shields.io/npm/dm/egg-apollo-server.svg?style=flat-square
+[download-url]: https://npmjs.org/package/egg-apollo-server
+
 ## The [apollo-server-koa](https://github.com/apollographql/apollo-server/tree/master/packages/apollo-server-koa) plugin in egg.
 
 ## Getting Started
