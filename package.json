@@ -1,6 +1,6 @@
 {
 	"name": "egg-apollo-server",
-	"version": "0.0.3",
+	"version": "0.1.0",
 	"description": "The apollo-server-koa plugin in egg.",
 	"directories": {
 		"lib": "lib"
