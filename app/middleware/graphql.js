@@ -15,6 +15,16 @@ module.exports = (_, app) => {
   }
   const options = { ...app.schemaConfig, ...graphqlConfig };
   const { graphiql = true, router, ...ApolloServerConfig } = options;
+  if (ApolloServerConfig && ApolloServerConfig.formatError) {
+    if (typeof ApolloServerConfig.formatError !== 'function') {
+      throw new Error('formatError must be function');
+    }
+    const formatError = ApolloServerConfig.formatError;
+    const appFormatError = error => {
+      return formatError(error, app);
+    };
+    ApolloServerConfig.formatError = appFormatError;
+  }
   const server = new ApolloServer({
     context: options => options.ctx,
     // 不设置request.credentials 会导致请求不带cookie

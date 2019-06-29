@@ -55,14 +55,13 @@ config.graphql = {
   //是否添加默认的type Query,Mutation,默认为true
   //如果为true须使用extend type Query|extend type Mutation,因为graphql规定同一个type只能定义一个
   //带来的好处时egg/graphql下不用再新建query,mutation目录
-  defaultEmptySchema:true, 
+  defaultEmptySchema: true,
 
   //可选字段,接受项目中发生的错误,然后自定义错误返回给前端
-  formatError: error => {
-    console.log(error);
-    return {
-      message: error.message
-    };
+  formatError: (error, app) => {
+    // console.log(error);
+    app.logger.error(error);
+    return error;
   },
   debug: false // 发生错误时,是否包含错误堆栈信息,生产环境要设置为false
 };
@@ -169,8 +168,10 @@ module.exports = {
 };
 ```
 
-#### demo  
-[egg中使用graphql](https://github.com/supperchong/egg-apollo-server/tree/master/examples/simple)
+#### demo
+
+[egg 中使用 graphql](https://github.com/supperchong/egg-apollo-server/tree/master/examples/simple)
+
 #### **options**
 
 - router <String> - 处理 graphql 请求的路由,默认为 "/graphql"

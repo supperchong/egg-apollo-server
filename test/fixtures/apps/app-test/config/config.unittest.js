@@ -15,8 +15,9 @@ module.exports = appInfo => {
     uploads: true, // 是否开启文件上传功能，默认开启
     defaultEmptySchema: true,
     // 可选字段,接受项目中发生的错误,然后自定义错误返回给前端
-    formatError: error => {
-      console.log(error);
+    formatError: (error, app) => {
+      // console.log(error);
+      app.logger.error(error);
       return error;
     },
     debug: false, // 发生错误时,是否包含错误堆栈信息,生产环境要设置为false
