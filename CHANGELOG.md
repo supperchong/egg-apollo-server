@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/supperchong/egg-apollo-server/compare/v0.1.0...v0.2.0) (2019-06-29)
+
+
+### Features
+
+* add app parameter in formatError ([6d9db95](https://github.com/supperchong/egg-apollo-server/commit/6d9db95))
+
+
+
 ## 0.1.0 (2019-05-28)
 
 
