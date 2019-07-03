@@ -35,6 +35,12 @@ module.exports = (_, app) => {
     },
     ...ApolloServerConfig,
   });
+  if (ApolloServerConfig.subscriptions) {
+    app.once('server', httpServer => {
+      // initial subscription
+      server.installSubscriptionHandlers(httpServer);
+    });
+  }
 
   const middlewares = [];
   const proxyApp = {
