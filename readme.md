@@ -57,6 +57,26 @@ config.graphql = {
   //带来的好处时egg/graphql下不用再新建query,mutation目录
   defaultEmptySchema: true,
 
+  //subscriptions的值为<Object>|<String>|false 见https://www.apollographql.com/docs/apollo-server/api/apollo-server/
+  //如果为String 表示订阅的路径
+  //如果为false 关闭订阅
+  //如果为object 可以添加path,keepAlive,onConnect,onDisconnect
+  subscriptions: {
+    onConnect: (connectionParams, webSocket) => {
+      console.log('connect');
+      if (connectionParams.authToken) {
+        // return validateToken(connectionParams.authToken)
+        //   .then(findUser(connectionParams.authToken))
+        //   .then(user => {
+        //     return {
+        //       currentUser: user,
+        //     }
+        //   })
+      }
+
+      // throw new Error('Missing auth token!')
+    }
+  },
   //可选字段,接受项目中发生的错误,然后自定义错误返回给前端
   formatError: (error, app) => {
     // console.log(error);
