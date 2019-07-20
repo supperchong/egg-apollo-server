@@ -27,4 +27,15 @@ module.exports = {
       return users.find(user => user.id == id);
     },
   },
+  Mutation: {
+    addUser: (root, params) => {
+      const id = users.length + 1;
+      const newUser = {
+        id,
+        ...params.input,
+      };
+      users.push(newUser);
+      return newUser;
+    },
+  },
 };
