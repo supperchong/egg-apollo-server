@@ -5,6 +5,59 @@ const assert = require('assert');
 const FormData = require('form-data');
 const fs = require('fs');
 const axios = require('axios');
+const { split } = require('apollo-link');
+const { HttpLink } = require('apollo-link-http');
+const { WebSocketLink } = require('apollo-link-ws');
+const { getMainDefinition } = require('apollo-utilities');
+const { InMemoryCache } = require('apollo-cache-inmemory');
+const ApolloClient = require('apollo-client').default;
+const ws = require('ws');
+const fetch = require('node-fetch');
+const cache = new InMemoryCache();
+const gql = require('graphql-tag');
+function createLink(port) {
+  const httpLink = new HttpLink({
+    uri: `http://localhost:${port}/graphql`,
+    fetch,
+  });
+
+  // Create a WebSocket link:
+  const wsLink = new WebSocketLink({
+    uri: `ws://localhost:${port}/graphql`,
+    options: {
+      reconnect: true,
+    },
+    webSocketImpl: ws,
+  });
+
+  // using the ability to split links, you can send data to each link
+  // depending on what kind of operation is being sent
+  const link = split(
+    // split based on operation type
+    ({ query }) => {
+      const definition = getMainDefinition(query);
+      return (
+        definition.kind === 'OperationDefinition' &&
+        definition.operation === 'subscription'
+      );
+    },
+    wsLink,
+    httpLink
+  );
+  return link;
+}
+function createApolloClient({ link, cache }) {
+  return new ApolloClient({
+    cache,
+    link,
+  });
+}
+
+function sleep(time) {
+  return new Promise(resolve => {
+    setTimeout(resolve, time);
+  });
+}
 const users = [
   {
     id: 1,
@@ -240,4 +293,67 @@ describe('test/app.test.js', () => {
       .expect(200);
     assert.equal(res.body.data.hello, 'HELLO');
   });
+});
+
+describe('test subscription', () => {
+  let app;
+  before(() => {
+    app = mock.app({
+      baseDir: 'apps/subscription-test',
+    });
+    return app.ready();
+  });
+
+  after(() => app.close());
+  afterEach(mock.restore);
+  it('should get data in subscription', async () => {
+    /**
+     * TODO 在调用httpRequest前使用app.server.address()返回null
+     * may be egg bug
+     */
+    const res = app
+      .httpRequest()
+      .get('/graphql')
+      .set('Accept', 'text/html')
+      .expect(200);
+    assert(res.type, 'text/html');
+
+    const port = app.server.address().port;
+    console.log('port', port);
+    const link = createLink(port);
+    const apolloClient = createApolloClient({ link, cache });
+
+    return new Promise(async resolve => {
+      apolloClient.subscribe({
+        query: gql`
+          subscription{
+            commentAdded(repoFullName:"asd"){
+                id
+                content
+              }
+            }
+          `,
+        variables: {},
+      }).subscribe({
+        next(data) {
+          assert.equal(data.data.commentAdded.id, 1);
+          assert.equal(data.data.commentAdded.content, 'Hello!');
+          resolve(data);
+        },
+        error(err) { console.error('err', err); },
+      });
+
+      await sleep(100);
+      const data = await apolloClient.mutate({
+        mutation: gql`
+          mutation{
+            sendComment
+          }
+        `,
+      });
+      assert.deepEqual(data, { data: { sendComment: true } });
+    });
+
+  });
+
 });
