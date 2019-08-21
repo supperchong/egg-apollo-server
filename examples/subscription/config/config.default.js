@@ -14,22 +14,10 @@ module.exports = appInfo => {
     graphiql: true,
     uploads: true, // 是否开启文件上传功能，默认开启
     defaultEmptySchema: true,
-    // 可选字段,接受项目中发生的错误,然后自定义错误返回给前端
     subscriptions: {
       // eslint-disable-next-line no-unused-vars
       onConnect: (connectionParams, webSocket) => {
-        console.log('connect');
-        if (connectionParams.authToken) {
-          // return validateToken(connectionParams.authToken)
-          //   .then(findUser(connectionParams.authToken))
-          //   .then(user => {
-          //     return {
-          //       currentUser: user,
-          //     }
-          //   })
-        }
 
-        // throw new Error('Missing auth token!')
       },
     },
     formatError: error => {
