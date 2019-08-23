@@ -9,8 +9,14 @@ extend type Query {
 }
 extend type Mutation {
   addUser(input: AddUser): User
+  updateUser(input: UpdateUser): Boolean
 }
 input AddUser {
+  name: String
+  age: Int
+}
+input UpdateUser {
+  id: ID!
   name: String
   age: Int
 }

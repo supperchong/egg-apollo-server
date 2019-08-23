@@ -3,6 +3,7 @@
 
 const { ApolloServer } = require('apollo-server-koa');
 const compose = require('koa-compose');
+const GraphqlServer = Symbol.for('Egg#graphqlServer');
 /**
  * @param {Object} options The `options` of apollo-server.
  * @return {Promise} The compose of middleware in apollo-server-koa.
@@ -41,7 +42,10 @@ module.exports = (_, app) => {
       server.installSubscriptionHandlers(httpServer);
     });
   }
-
+  /**
+   * 将server实例挂载在app上,这样可以在service里访问了
+   */
+  app[GraphqlServer] = server;
   const middlewares = [];
   const proxyApp = {
     use: m => {

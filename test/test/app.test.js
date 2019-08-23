@@ -357,3 +357,107 @@ describe('test subscription', () => {
   });
 
 });
+
+describe('test graphql query without http', () => {
+  let app;
+  before(() => {
+    app = mock.app({
+      baseDir: 'apps/app-test',
+    });
+    return app.ready();
+  });
+
+  after(() => app.close());
+  afterEach(mock.restore);
+
+  it('request get should return users', async () => {
+    const ctx = await app.createAnonymousContext();
+    const { data } = await ctx
+      .graphql
+      .query({
+        query: gql`
+        query getUsers{
+          users{
+            id
+            name
+            age
+          }
+        }
+        `,
+      });
+    assert.deepEqual(data, {
+      users,
+    });
+  });
+
+  it('should return user where id=1', async () => {
+    const ctx = await app.createAnonymousContext();
+    const { data } = await ctx
+      .graphql
+      .query({
+        query: gql`
+        query getUsers($id:ID!){
+          user(id:$id){
+            id
+            name
+          }
+        }
+        `,
+        variables: {
+          id: 1,
+        },
+      });
+    const user = {
+      id: 1,
+      name: '小王',
+    };
+    assert.deepEqual(data, {
+      user,
+    });
+  });
+
+  it('should update user where id=1', async () => {
+    const ctx = await app.createAnonymousContext();
+    const { data } = await ctx
+      .graphql
+      .mutate({
+        mutation: gql`
+        mutation updateUser($input:UpdateUser){
+          updateUser(input:$input)
+        }
+        `,
+        variables: {
+          input: {
+            id: 1,
+            name: 'xiaowang',
+          },
+        },
+      });
+    const { data: { user } } = await ctx
+      .graphql
+      .query({
+        query: gql`
+        query getUsers($id:ID!){
+          user(id:$id){
+            id
+            name
+          }
+        }
+        `,
+        variables: {
+          id: 1,
+        },
+      });
+    const _user = {
+      id: 1,
+      name: 'xiaowang',
+    };
+    assert.deepEqual(data, {
+      updateUser: true,
+    });
+    assert.deepEqual(_user,
+      user
+    );
+  });
+
+});

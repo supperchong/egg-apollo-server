@@ -27,4 +27,22 @@ module.exports = {
       return users.find(user => user.id == id);
     },
   },
+  Mutation: {
+    addUser: (root, params) => {
+      const id = users.length + 1;
+      const newUser = {
+        id,
+        ...params.input,
+      };
+      users.push(newUser);
+      return newUser;
+    },
+    updateUser: (root, params) => {
+      const { input } = params;
+      // eslint-disable-next-line eqeqeq
+      const user = users.find(({ id }) => id == input.id);
+      Object.assign(user, input);
+      return true;
+    },
+  },
 };

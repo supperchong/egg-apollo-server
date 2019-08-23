@@ -37,5 +37,11 @@ module.exports = {
       users.push(newUser);
       return newUser;
     },
+    updateUser: (root, params) => {
+      const { input } = params;
+      const user = users.find(id => id === input.id);
+      Object.assign(user, input);
+      return true;
+    },
   },
 };
