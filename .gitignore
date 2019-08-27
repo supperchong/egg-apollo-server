@@ -7,3 +7,4 @@ node_modules/
 run
 logs
 coverage
+package-lock.json
