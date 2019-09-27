@@ -1,6 +1,6 @@
 'use strict';
 
-exports.sequelize = {
+exports.graphql = {
   enable: true,
   package: 'egg-apollo-server',
 };
