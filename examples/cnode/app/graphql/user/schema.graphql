@@ -1,0 +1,12 @@
+extend type Query {
+  user(loginname: String!): User
+}
+type User {
+  loginname: String
+  avatar_url: String
+  githubUsername: String
+  create_at: String
+  score: Int
+  recent_topics: [Topic]
+  recent_replies: [Topic]
+}

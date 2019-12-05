@@ -1,0 +1,29 @@
+extend type Query {
+  topics(page: Int, limit: Int, mdrender: String, tab: Tab): [Topic]
+  topic(id: ID, mdrender: Boolean): Topic
+}
+type Topic {
+  id: String
+  author_id: String
+  tab: String
+  content: String
+  title: String
+  last_reply_at: String
+  good: Boolean
+  top: Boolean
+  reply_count: Int
+  visit_count: Int
+  create_at: String
+  author: Author
+}
+type Author {
+  loginname: String
+  avatar_url: String
+}
+enum Tab {
+  ask
+  share
+  job
+  good
+  all
+}

@@ -1,0 +1,7 @@
+extend type Query {
+  messageCount(accesstoken: String!): Int
+}
+extend type Mutation {
+  markMessages(accesstoken: String!): [ID]
+  markMessage(accesstoken: String!, msg_id: ID!): ID
+}
